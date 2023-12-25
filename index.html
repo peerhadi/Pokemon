@@ -1,83 +1,170 @@
 <style>
-  body {
-      overflow: hidden;
-      height: 100vh;
-      background-color: black;
-      font-family: "Roboto", sans-serif;
-      padding: 0;
-  }
+    body {
+        overflow: hidden;
+        height: 100vh;
+        background-color: black;
+        font-family: "Roboto", sans-serif;
+        padding: 0;
+    }
 
-  h1 {
-      margin: 0;
-  }
+    h1 {
+        margin: 0;
+    }
 
-  button:hover {
-      background-color: #ddd;
-      cursor: pointer
-  }
-  button {
-      border: 0;
-      font-size: 35px;
-  }
+    button:hover {
+        background-color: #ddd;
+        cursor: pointer;
+    }
+    button {
+        border: 0;
+        font-size: 35px;
+    }
 
-  
-  #attackType{
-      font-size: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 33.33%;
-      border-left: 4px solid black;
-  }
+    #attackType {
+        font-size: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 33.33%;
+        border-left: 4px solid black;
+    }
 
-  #attackBox{
-      width: 66.66%;
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-  }
-  
+    #attackBox {
+        width: 66.66%;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+    }
 
-  #TextBox{
-      background-color: white;
-      height: 180px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-top: 8px solid black;
-      display: flex
-  }
+    #TextBox {
+        background-color: white;
+        height: 180px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 8px solid black;
+        display: flex;
+    }
 </style>
 <div style="display: inline-block; position: relative">
-  <div id="overlappingDiv" style="background-color: black;position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; pointer-events: none; z-index: 10"></div>
-  <canvas></canvas>
-  <div id="userInterface">
-  <div style="background-color: white; width: 350px; position: absolute; top: 50px; left: 50px; border: 4px solid black; padding: 18px;">
-    <div style="font-size: 30px">Draggle</div>
-    <div style="position: relative">
-      <div style="height: 6px; background-color: #ccc; margin-top: 12px;"></div>
-      <div id="enemyHealthBar" style="height: 6px; background-color: green; position: absolute; top: 0; left: 0; right: 0"></div>
+    <div
+        id="overlappingDiv"
+        style="
+            background-color: black;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        "
+    ></div>
+    <canvas></canvas>
+    <div id="userInterface">
+        <div
+            style="
+                background-color: white;
+                width: 350px;
+                position: absolute;
+                top: 50px;
+                left: 50px;
+                border: 4px solid black;
+                padding: 18px;
+            "
+        >
+            <div style="font-size: 30px">Draggle</div>
+            <div style="position: relative">
+                <div
+                    style="
+                        height: 6px;
+                        background-color: #ccc;
+                        margin-top: 12px;
+                    "
+                ></div>
+                <div
+                    id="enemyHealthBar"
+                    style="
+                        height: 6px;
+                        background-color: green;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                    "
+                ></div>
+            </div>
+        </div>
+        <div
+            style="
+                background-color: white;
+                width: 350px;
+                position: absolute;
+                top: 550px;
+                right: 50px;
+                border: 4px solid black;
+                padding: 18px;
+            "
+        >
+            <div style="font-size: 30px">Emby</div>
+            <div style="position: relative">
+                <div
+                    style="
+                        height: 6px;
+                        background-color: #ccc;
+                        margin-top: 12px;
+                    "
+                ></div>
+                <div
+                    id="playerHealthBar"
+                    style="
+                        height: 6px;
+                        background-color: green;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                    "
+                ></div>
+            </div>
+        </div>
+        <div id="TextBox">
+            <div
+                id="dialogueBox"
+                style="
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-color: white;
+                    padding: 12px;
+                    display: none;
+                    font-size: 30px;
+                    font-family: 'Nunito', sans-serif;
+                "
+            >
+                joswjiosjwio
+            </div>
+            <div id="attackBox"></div>
+            <div id="attackType">Attack Type</div>
+        </div>
     </div>
-  </div>
-  <div style="background-color: white; width: 350px; position: absolute; top: 550px; right: 50px; border: 4px solid black; padding: 18px;">
-    <div style="font-size: 30px">Emby</div>
-    <div style="position: relative">
-      <div style="height: 6px; background-color: #ccc; margin-top: 12px;"></div>
-      <div id="playerHealthBar" style="height: 6px; background-color: green; position: absolute; top: 0; left: 0; right: 0"></div>
-    </div>
-  </div>
-  <div id="TextBox">
-    <div id="dialogueBox"style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: white; padding: 12px; display: none; font-size: 30px; font-family: 'Nunito', sans-serif;">joswjiosjwio</div>
-    <div id="attackBox">
-    </div>
-    <div id="attackType">
-      Attack Type
-    </div>
-  </div>
-  </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>xs
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+    integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+xs
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
 <script src="./data/collisions.js"></script>
 <script src="./data/audio.js"></script>
 <script src="./data/attacks.js"></script>
